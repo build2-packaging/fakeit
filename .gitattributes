@@ -17,3 +17,9 @@
 # Use `binary` to make sure certain files are never auto-detected as text.
 #
 #*.png binary
+
+fakeit/single_header symlink=dir
+
+tests/unit/config symlink=dir
+tests/unit/include symlink=dir
+tests/unit/tests symlink=dir

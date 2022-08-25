@@ -1,6 +1,7 @@
 # Test executables.
 #
 driver
+fakeit-tests
 
 # Testscript output directories (can be symlinks).
 #
