@@ -1,0 +1,3 @@
+# fakeit
+
+C++ library

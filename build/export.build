@@ -1,0 +1,6 @@
+$out_root/
+{
+  include fakeit/
+}
+
+export $out_root/fakeit/$import.target
