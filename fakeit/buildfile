@@ -6,8 +6,6 @@ lib{fakeit}: hxx{version config/** include/**} $impl_libs $intf_libs
 
 hxx{version}: in{version} $src_root/manifest
 
-hxx{export}@./: cxx.importable = false
-
 # Export options.
 #
 lib{fakeit}:
