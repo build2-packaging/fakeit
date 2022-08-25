@@ -3,10 +3,9 @@ name: fakeit
 version: 0.1.0-a.0.z
 summary: FakeIt is a simple mocking framework for C++.
 license: MIT
+topics: C++, mocking, faking
 description-file: README.md
-url: https://example.org/fakeit
-email: helmesjo@gmail.com
-#build-error-email: helmesjo@gmail.com
+url: https://github.com/eranpeer/FakeIt
 depends: * build2 >= 0.15.0
 depends: * bpkg >= 0.15.0
-#depends: libhello ^1.0.0
+requires: c++11
