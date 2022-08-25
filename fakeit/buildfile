@@ -2,7 +2,7 @@ intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
-lib{fakeit}: hxx{version config/** include/**} $impl_libs $intf_libs
+lib{fakeit}: hxx{version fakeit.hpp config/** include/**} $impl_libs $intf_libs
 
 hxx{version}: in{version} $src_root/manifest
 
@@ -31,6 +31,6 @@ else
 #
 {hxx ixx txx}{*}:
 {
-  install         = include/
+  install         = include/fakeit/
   install.subdirs = true
 }
