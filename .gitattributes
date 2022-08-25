@@ -18,8 +18,7 @@
 #
 #*.png binary
 
-fakeit/single_header symlink=dir
+fakeit/config symlink=dir
+fakeit/include symlink=dir
 
-tests/unit/config symlink=dir
-tests/unit/include symlink=dir
 tests/unit/tests symlink=dir
