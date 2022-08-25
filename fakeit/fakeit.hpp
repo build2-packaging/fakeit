@@ -1,1 +1,1 @@
-../upstream/single_header/standalone/fakeit.hpp
+../upstream/config/standalone/fakeit.hpp

@@ -1,5 +1,5 @@
 libs =
-# import libs += fakeit%lib{fakeit}
+import libs += fakeit%lib{fakeit}
 
 # MSVC:
 #   Exclude tests that are broken in v2.3.0 (basically the whole test-suite is written for VS 2015 & slightly adjusted for 2019)
@@ -18,11 +18,7 @@ else
 }
 
 # TODO: How to conditionally exclude sources if VS2019+ & fakeit <= v2.3.0 ?
-exe{fakeit-tests}: {hxx ixx txx cxx}{tests/** -{$broken_tests}}
-
-# The tests uses a specialized version of fakeit.hpp:
-# https://github.com/eranpeer/FakeIt/blob/78ca536e6b32f11e2883d474719a447915e40005/tests/CMakeLists.txt#L2
-cxx.poptions =+ "-I$src_base/include" "-I$src_base/config/standalone"
+exe{fakeit-tests}: {hxx ixx txx cxx}{tests/** -{$broken_tests}} $libs
 
 # Mimic hard-coded flags for tests as done in upstream repo
 switch $cxx.class
