@@ -10,7 +10,7 @@ libs =
 
 if($cxx.id == 'msvc')
 {
-  broken_tests = tests/cpp14_tests.cpp test/miscellaneous_tests.cpp tests/msc_type_info_tests.cpp tests/spying_tests.cpp tests/stubbing_tests.cpp tests/type_info_tests.cpp tests/verification_tests.cpp
+  broken_tests = tests/cpp14_tests.cpp tests/miscellaneous_tests.cpp tests/msc_type_info_tests.cpp tests/spying_tests.cpp tests/stubbing_tests.cpp tests/type_info_tests.cpp tests/verification_tests.cpp
 }
 else
 {
