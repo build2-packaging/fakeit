@@ -18,20 +18,27 @@ else
 }
 
 # TODO: How to conditionally exclude sources if VS2019+ & fakeit <= v2.3.0 ?
+#
+# @@ TODO: this needs to be redone per https://github.com/build2/HOWTO/blob/master/entries/keep-build-graph-config-independent.md
+#
 exe{fakeit-tests}: {hxx ixx txx cxx}{tests/** -{$broken_tests}} $libs
 
 # Mimic hard-coded flags for tests as done in upstream repo
+#
+# @@ TODO: things like optimization levels, etc., should not be set
+#          by the buildfile. It is Ok to disable warnings.
+#
 switch $cxx.class
 {
   case 'gcc'
   {
     # See: https://github.com/eranpeer/FakeIt/blob/78ca536e6b32f11e2883d474719a447915e40005/tests/CMakeLists.txt#L5
-    cxx.coptions += -Wno-ignored-qualifiers -flto -Wl,--allow-multiple-definition
+    cxx.coptions += -Wno-ignored-qualifiers #-Wl,--allow-multiple-definition
   }
   case 'msvc'
   {
     # Open all_tests.vcxproj and look through the project properties
-    cxx.coptions += /Gy /Oi
-    cxx.loptions += /OPT:REF
+    #cxx.coptions += /Gy /Oi
+    #cxx.loptions += /OPT:REF
   }
 }
