@@ -2,15 +2,15 @@ intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
-lib{fakeit}: hxx{fakeit.hpp config/** include/**} $impl_libs $intf_libs
+lib{fakeit}: hxx{config/** include/**} $impl_libs $intf_libs
 
 # Export options.
 #
 lib{fakeit}:
 {
-  # According to lib it's included as '<fakeit.hpp>', but support '<fakeit/fakeit.hpp>' as well.
-  cxx.export.poptions = \
-    "-I$src_root" "-I$src_base/include" "-I$src_base/config/standalone"
+  # According to lib it's included as '<fakeit.hpp>' and supporting
+  # '<fakeit/fakeit.hpp>' will require a major surgery.
+  cxx.export.poptions = "-I$src_base/include" "-I$src_base/config/standalone"
   cxx.export.libs = $intf_libs
 }
 
