@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-#include <fakeit/version.hpp>
 // Support both include forms (for backwards compatibility)
 #include <fakeit/fakeit.hpp>
 #include <fakeit.hpp>

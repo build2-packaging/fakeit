@@ -2,9 +2,7 @@ intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
-lib{fakeit}: hxx{version fakeit.hpp config/** include/**} $impl_libs $intf_libs
-
-hxx{version}: in{version} $src_root/manifest
+lib{fakeit}: hxx{fakeit.hpp config/** include/**} $impl_libs $intf_libs
 
 # Export options.
 #
@@ -12,8 +10,7 @@ lib{fakeit}:
 {
   # According to lib it's included as '<fakeit.hpp>', but support '<fakeit/fakeit.hpp>' as well.
   cxx.export.poptions = \
-    "-I$src_root" "-I$src_base/include" "-I$src_base/config/standalone" \
-    "-I$out_root" "-I$out_base/include" "-I$out_base/config/standalone"
+    "-I$src_root" "-I$src_base/include" "-I$src_base/config/standalone"
   cxx.export.libs = $intf_libs
 }
 
