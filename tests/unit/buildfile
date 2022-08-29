@@ -11,7 +11,7 @@ import libs += fakeit%lib{fakeit}
 msvc_broken_tests = tests/cpp14_tests.cpp tests/miscellaneous_tests.cpp tests/msc_type_info_tests.cpp tests/spying_tests.cpp tests/stubbing_tests.cpp tests/type_info_tests.cpp tests/verification_tests.cpp
 unix_broken_tests = tests/msc_type_info_tests.cpp
 
-exe{fakeit-tests}: {hxx cxx}{tests/** -{$msvc_broken_tests $unix_broken_tests}}
+exe{fakeit-tests}: {hxx cxx}{tests/** -{$msvc_broken_tests $unix_broken_tests}} $libs
 exe{fakeit-tests}: cxx{$msvc_broken_tests}: include = ($cxx.target.class != 'windows')
 exe{fakeit-tests}: cxx{$unix_broken_tests}: include = ($cxx.target.class == 'windows')
 
