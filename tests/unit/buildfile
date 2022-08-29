@@ -8,30 +8,17 @@ import libs += fakeit%lib{fakeit}
 #   * https://github.com/eranpeer/FakeIt/pull/290
 #   * etc.
 
-if($cxx.id == 'msvc')
-{
-  broken_tests = tests/cpp14_tests.cpp tests/miscellaneous_tests.cpp tests/msc_type_info_tests.cpp tests/spying_tests.cpp tests/stubbing_tests.cpp tests/type_info_tests.cpp tests/verification_tests.cpp
-}
-else
-{
-  broken_tests = tests/msc_type_info_tests.cpp
-}
+msvc_broken_tests = tests/cpp14_tests.cpp tests/miscellaneous_tests.cpp tests/msc_type_info_tests.cpp tests/spying_tests.cpp tests/stubbing_tests.cpp tests/type_info_tests.cpp tests/verification_tests.cpp
+unix_broken_tests = tests/msc_type_info_tests.cpp
 
-# TODO: How to conditionally exclude sources if VS2019+ & fakeit <= v2.3.0 ?
-exe{fakeit-tests}: {hxx ixx txx cxx}{tests/** -{$broken_tests}} $libs
+exe{fakeit-tests}: {hxx cxx}{tests/** -{$msvc_broken_tests $unix_broken_tests}} $libs
+exe{fakeit-tests}: cxx{$msvc_broken_tests}: include = ($cxx.target.class != 'windows')
+exe{fakeit-tests}: cxx{$unix_broken_tests}: include = ($cxx.target.class == 'windows')
 
-# Mimic hard-coded flags for tests as done in upstream repo
 switch $cxx.class
 {
   case 'gcc'
   {
-    # See: https://github.com/eranpeer/FakeIt/blob/78ca536e6b32f11e2883d474719a447915e40005/tests/CMakeLists.txt#L5
-    cxx.coptions += -Wno-ignored-qualifiers -flto -Wl,--allow-multiple-definition
-  }
-  case 'msvc'
-  {
-    # Open all_tests.vcxproj and look through the project properties
-    cxx.coptions += /Gy /Oi
-    cxx.loptions += /OPT:REF
+    cxx.coptions += -Wno-ignored-qualifiers
   }
 }

@@ -2,18 +2,16 @@ intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
-lib{fakeit}: hxx{version fakeit.hpp config/** include/**} $impl_libs $intf_libs
-
-hxx{version}: in{version} $src_root/manifest
+lib{fakeit}: hxx{config/standalone/** include/**} $impl_libs $intf_libs
 
 # Export options.
 #
 lib{fakeit}:
 {
-  # According to lib it's included as '<fakeit.hpp>', but support '<fakeit/fakeit.hpp>' as well.
-  cxx.export.poptions = \
-    "-I$src_root" "-I$src_base/include" "-I$src_base/config/standalone" \
-    "-I$out_root" "-I$out_base/include" "-I$out_base/config/standalone"
+  # According to lib it's included as '<fakeit.hpp>' and supporting
+  # '<fakeit/fakeit.hpp>' will require a major surgery.
+  #
+  cxx.export.poptions = "-I$src_base/include" "-I$src_base/config/standalone"
   cxx.export.libs = $intf_libs
 }
 
@@ -26,10 +24,16 @@ if $version.pre_release
 else
   lib{fakeit}: bin.lib.version = "-$version.major.$version.minor"
 
-# Install into the fakeit/ subdirectory of, say, /usr/include/
-# recreating subdirectories.
+# Install into the fakeit/ subdirectory of, say, /usr/include/. Note that
+# header is included as <fakeit.hpp> so we need to add -I/usr/include/fakeit
+# to pkg-config.
 #
-{hxx ixx txx}{*}:
+lib{fakeit}: cxx.pkgconfig.include = include/fakeit/
+
+# We "merge" the upstream's include/* and config/standalone/* into a single
+# directory recreating subdirectories.
+#
+config/standalone/{hxx ixx txx}{*} include/{hxx ixx txx}{*}:
 {
   install         = include/fakeit/
   install.subdirs = true
