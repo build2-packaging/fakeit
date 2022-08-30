@@ -1,0 +1,5 @@
+: 1
+name: fakeit
+version: 2.3.0
+summary: FakeIt is a simple mocking framework for C++.
+license: MIT
